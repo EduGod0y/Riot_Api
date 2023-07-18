@@ -19,6 +19,7 @@ def get_puuid(summoner_name, api_key):
 
 
 
+
 def get_matches(puuid, count,api_key, summoner_name):
   puuid = get_puuid(summoner_name,api_key)
   api_url = (
@@ -81,9 +82,9 @@ def dados(puuid, match_data):
 
 
 
-def get_stats(summoner_name, api_key):
+def get_stats(summoner_name, number, api_key):
   puuid = get_puuid(summoner_name, api_key)
-  matches = get_matches( puuid,'50',api_key,summoner_name)
+  matches = get_matches( puuid, number ,api_key,summoner_name)
 
 
   campeao = []
@@ -97,12 +98,13 @@ def get_stats(summoner_name, api_key):
 
   for match_id in matches:
     match_data = get_match_data(match_id,  api_key)
-    campeao.append(dados(puuid, match_data)['champ'])
-    kills.append(dados(puuid, match_data)['kills'])
-    deaths.append(dados(puuid, match_data)['deaths'])
-    assists.append(dados(puuid, match_data)['assists'])
-    kda.append(dados(puuid, match_data)['kda'])
-    ganhador.append(dados(puuid, match_data)['win'])
+    match_dict = dados(puuid, match_data,)
+    campeao.append(match_dict['champ'])
+    kills.append(match_dict['kills'])
+    deaths.append(match_dict['deaths'])
+    assists.append(match_dict['assists'])
+    kda.append(match_dict['kda'])
+    ganhador.append(match_dict['win'])
   
 
   table = {'Champion': campeao, 'Kills': kills, 'Assists': assists, 'Deaths': deaths, 'KDA':kda, 'Win':ganhador}
