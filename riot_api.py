@@ -108,16 +108,12 @@ def get_stats(summoner_name, number, api_key):
   
 
   table = {'Champion': campeao, 'Kills': kills, 'Assists': assists, 'Deaths': deaths, 'KDA':kda, 'Win':ganhador}
-  df = pd.DataFrame(data=table)
-  df2 = df.groupby('Champion')['KDA'].mean().round(2).to_frame().sort_values(by='KDA')
-  df3 = df.groupby('Champion').size().sort_values(ascending=True).to_frame()
 
-  win = ganhador.count('Victory')
-  defeat = ganhador.count('Defeat')
 
-  winrate = (win/(win+defeat))*100
 
-  return df
+  return table
+
+
 
 
 #for champ in df.champion:
@@ -130,5 +126,3 @@ def get_stats(summoner_name, number, api_key):
 
 #image = requests.get('http://ddragon.leagueoflegends.com/cdn/13.13.1/img/champion/Aatrox.png')
 
-#fp = Image.open(image)
-#display.display(fp)

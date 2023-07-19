@@ -17,9 +17,9 @@ with st.sidebar:
     st.header('You:')
     summoner = st.text_input('Summoner name:', '', key='')
     number = st.slider('Escolha o número de partidas', 0, 100)
-    agree = st.checkbox('Run!')
+    agree = st.button('Run!')
     
-
+st.image('https://whatifgaming.com/wp-content/uploads/2022/05/League-Wallpaper-1024x573.jpg.webp', width=500)
 
 
 with header:
@@ -29,7 +29,7 @@ with header:
     st.text('In this project i will use the League of legends API to show you how you can improve your gameplay!')
 
 if agree:
-    table = get_stats(summoner, number, 'RGAPI-a3f27e13-34b2-411e-a63d-f54ecf504cac')
+    table = get_stats(summoner, number, 'RGAPI-8471a253-b791-4aee-b58e-07ec93633d4d')
 
     df = pd.DataFrame(data=table)
 
@@ -37,6 +37,13 @@ if agree:
 
     df3 = df.groupby('Champion').size().sort_values(ascending=False).to_frame()
 
+    
+    win = df['Win'].value_counts(normalize=True)['Victory'].round(2)*100
+    
+
+    #winrate = (win/(win+defeat))*100
+
+    st.write(df)
 
     col1, col2 = st.columns(2)
 
@@ -48,4 +55,8 @@ if agree:
     with col2: 
         st.subheader("Most played champions:")
         st.dataframe(df3)
+
+
+    with st.sidebar:
+        st.write('Your winrate is: ' + str(win)+'%')
 
