@@ -29,7 +29,7 @@ with header:
     st.text('In this project i will use the League of legends API to show you how you can improve your gameplay!')
 
 if agree:
-    table = get_stats(summoner, number, 'RGAPI-8471a253-b791-4aee-b58e-07ec93633d4d')
+    table = get_stats(summoner, number, '')
 
     df = pd.DataFrame(data=table)
 
